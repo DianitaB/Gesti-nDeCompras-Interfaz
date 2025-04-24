@@ -1,4 +1,4 @@
-package ec.edu.ups.poo.models;
+package ec.edu.ups.poo.clases;
 
 import java.util.GregorianCalendar;
 

@@ -1,4 +1,4 @@
-package ec.edu.ups.poo.models;
+package ec.edu.ups.poo.clases;
 
 public class ProductoRopa extends Producto {
     private String talla;
@@ -33,4 +33,5 @@ public class ProductoRopa extends Producto {
                 ", color='" + color + '\'' +
                 '}';
     }
+    //
 }
