@@ -21,7 +21,7 @@ public class ProductoAlimento extends Producto {
 
     @Override
     public String toString() {
-        return super.toString() + "ProductoAlimento{" +
+        return "ProductoAlimento{" +
                 "fechaVencimiento=" +
                 fechaVencimiento.getTime() +
                 '}';
