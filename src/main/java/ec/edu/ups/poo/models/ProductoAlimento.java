@@ -14,4 +14,16 @@ public class ProductoAlimento extends Producto {
     public GregorianCalendar getFechaVencimiento() {
         return fechaVencimiento;
     }
+
+    public void setFechaVencimiento(GregorianCalendar fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "ProductoAlimento{" +
+                "fechaVencimiento=" +
+                fechaVencimiento.getTime() +
+                '}';
+    }
 }
