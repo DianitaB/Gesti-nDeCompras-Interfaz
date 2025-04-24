@@ -25,6 +25,5 @@ public class ProductoAlimento extends Producto {
                 "fechaVencimiento=" +
                 fechaVencimiento.getTime() +
                 '}';
-        //
     }
 }
