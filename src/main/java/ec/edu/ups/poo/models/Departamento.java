@@ -5,26 +5,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Departamento implements IGestionable {
-    private int id;
-    private String nombre;
-    private List<Empleado> empleados;
+    private int idDepartamento;
+    private String nomDepartamento;
 
+    // Constructor, getters y setters
     public Departamento(int id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
-        this.empleados = new ArrayList<>();
+        this.idDepartamento = idDepartamento;
+        this.nomDepartamento = nomDepartamento;
     }
 
-    public void agregarEmpleado(Empleado empleado) {
-        empleados.add(empleado);
+    public int getId() {
+        return idDepartamento;
     }
-
-    public List<Empleado> getEmpleados() {
-        return empleados;
+    public String getNombre() {
+        return nomDepartamento;
+    }
+    public void setId(int id) {
+        this.idDepartamento = idDepartamento;
+    }
+    public void setNombre(String nombre) {
+        this.nomDepartamento = nomDepartamento;
     }
 
     @Override
-    public void gestionar() {
-        System.out.println("Gestionando Departamento: " + nombre);
+    public void registrar() {
+
+    }
+    @Override
+    public void listar() {
+    }
+    @Override
+    public void buscar() {
+
     }
 }

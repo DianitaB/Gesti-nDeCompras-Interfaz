@@ -3,12 +3,31 @@ package ec.edu.ups.poo.models;
 import ec.edu.ups.poo.interfaces.IGestionable;
 
 public class Proveedor extends Persona implements IGestionable {
-    public Proveedor(int id, String nombre, String correo) {
-        super(id, nombre, correo);
+    private String tipoContribuyente;
+
+    public Proveedor(int id, String nombre, String correoElectronico, int telefono, String tipoContribuyente) {
+        super(id, nombre, correoElectronico,telefono);
+        this.tipoContribuyente = tipoContribuyente;
+    }
+
+    public String getContacto() {
+        return tipoContribuyente;
+    }
+    public void setContacto(String contacto) {
+        this.tipoContribuyente = contacto;
     }
 
     @Override
-    public void gestionar() {
-        System.out.println("Gestionando Proveedor: " + nombre);
+    public void registrar() {
+
     }
+    @Override
+    public void listar() {
+
+    }
+    @Override
+    public void buscar() {
+
+    }
+
 }

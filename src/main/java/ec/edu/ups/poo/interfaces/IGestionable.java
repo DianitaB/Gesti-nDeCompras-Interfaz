@@ -1,5 +1,7 @@
 package ec.edu.ups.poo.interfaces;
 
 public interface IGestionable {
-    void gestionar();
+    void registrar();
+    void listar();
+    void buscar();
 }

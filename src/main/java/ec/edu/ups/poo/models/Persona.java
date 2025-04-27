@@ -3,12 +3,14 @@ package ec.edu.ups.poo.models;
 public abstract class Persona {
     protected int id;
     protected String nombre;
-    protected String correo;
+    protected String correoElectronico;
+    protected int telefono;
 
-    public Persona(int id, String nombre, String correo) {
+    public Persona(int id, String nombre, String correoElectronico, int telefono) {
         this.id = id;
         this.nombre = nombre;
-        this.correo = correo;
+        this.correoElectronico = correoElectronico;
+        this.telefono = telefono;
     }
 
     public int getId() {
@@ -27,12 +29,19 @@ public abstract class Persona {
         this.nombre = nombre;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getCorreoElectronico() {
+        return correoElectronico;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
     }
 
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
 }
