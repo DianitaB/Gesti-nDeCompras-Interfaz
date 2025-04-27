@@ -29,5 +29,10 @@ public class Proveedor extends Persona implements IGestionable {
     public void buscar() {
 
     }
+    @Override
+    public String toString() {
+        return "Proveedor ID: " + id + ", Nombre: " + nombre + ", Correo: " + correoElectronico + ", Teléfono: " + telefono + ", Tipo: " + tipoContribuyente;
+    }
+
 
 }

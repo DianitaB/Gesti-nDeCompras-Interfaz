@@ -63,12 +63,7 @@ public class SolicitudCompra {
 
     @Override
     public String toString() {
-        return "SolicitudCompra{" +
-                "idSolicitud=" + idSolicitud +
-                ", fecha=" + fecha +
-                ", estado=" + estado +
-                ", observaciones='" + observaciones + '\'' +
-                ", fechaSolicitud=" + fechaSolicitud +
-                '}';
+        return "Solicitud ID: " + idSolicitud + ", Fecha: " + fecha + ", Estado: " + estado + ", Observaciones: " + observaciones;
     }
+
 }

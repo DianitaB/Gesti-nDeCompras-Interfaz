@@ -3,8 +3,11 @@ package ec.edu.ups.poo.main;
 import ec.edu.ups.poo.models.Proveedor;
 import ec.edu.ups.poo.models.Producto;
 import ec.edu.ups.poo.models.SolicitudCompra;
+import ec.edu.ups.poo.enums.EstadoSolicitud;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
 
@@ -37,97 +40,172 @@ public class Main {
             opcion = Integer.parseInt(scanner.nextLine());
 
             switch (opcion) {
-                case 1:
-                    registrarProveedor();
-                    break;
-                case 2:
-                    registrarProducto();
-                    break;
-                case 3:
-                    registrarSolicitudCompra();
-                    break;
-                case 4:
-                    listarProveedores();
-                    break;
-                case 5:
-                    listarProductos();
-                    break;
-                case 6:
-                    listarSolicitudesCompra();
-                    break;
-                case 7:
-                    buscarProveedorPorID();
-                    break;
-                case 8:
-                    buscarProductoPorNombre();
-                    break;
-                case 9:
-                    buscarSolicitudPorNumero();
-                    break;
-                case 10:
-                    aprobarSolicitudCompra();
-                    break;
-                case 11:
-                    rechazarSolicitudCompra();
-                    break;
-                case 12:
-                    calcularTotalSolicitud();
-                    break;
-                case 0:
-                    System.out.println("Saliendo del sistema...");
-                    break;
-                default:
-                    System.out.println("Opción inválida. Intente de nuevo.");
+                case 1: registrarProveedor(); break;
+                case 2: registrarProducto(); break;
+                case 3: registrarSolicitudCompra(); break;
+                case 4: listarProveedores(); break;
+                case 5: listarProductos(); break;
+                case 6: listarSolicitudesCompra(); break;
+                case 7: buscarProveedorPorID(); break;
+                case 8: buscarProductoPorNombre(); break;
+                case 9: buscarSolicitudPorNumero(); break;
+                case 10: aprobarSolicitudCompra(); break;
+                case 11: rechazarSolicitudCompra(); break;
+                case 12: calcularTotalSolicitud(); break;
+                case 0: System.out.println("Saliendo del sistema..."); break;
+                default: System.out.println("Opción inválida. Intente de nuevo.");
             }
         } while (opcion != 0);
     }
 
-    // Métodos básicos: de momento solo impresión de mensajes (luego tú puedes completar)
     private static void registrarProveedor() {
-        System.out.println("Registrar proveedor...");
+        System.out.print("Ingrese ID del proveedor: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        System.out.print("Ingrese nombre del proveedor: ");
+        String nombre = scanner.nextLine();
+        System.out.print("Ingrese correo electrónico: ");
+        String correo = scanner.nextLine();
+        System.out.print("Ingrese teléfono: ");
+        int telefono = Integer.parseInt(scanner.nextLine());
+        System.out.print("Ingrese tipo de contribuyente: ");
+        String tipo = scanner.nextLine();
+
+        proveedores.add(new Proveedor(id, nombre, correo, telefono, tipo));
+        System.out.println("Proveedor registrado exitosamente.");
     }
 
     private static void registrarProducto() {
-        System.out.println("Registrar producto...");
+        System.out.print("Ingrese ID del producto: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        System.out.print("Ingrese precio del producto: ");
+        double precio = Double.parseDouble(scanner.nextLine());
+        System.out.println("Seleccione un proveedor disponible:");
+        listarProveedores();
+        System.out.print("Ingrese ID del proveedor: ");
+        int idProveedor = Integer.parseInt(scanner.nextLine());
+
+        Proveedor proveedor = proveedores.stream()
+                .filter(p -> p.getId() == idProveedor)
+                .findFirst()
+                .orElse(null);
+
+        if (proveedor != null) {
+            productos.add(new Producto(id, precio, proveedor));
+            System.out.println("Producto registrado exitosamente.");
+        } else {
+            System.out.println("Proveedor no encontrado. No se registró el producto.");
+        }
     }
 
     private static void registrarSolicitudCompra() {
-        System.out.println("Registrar solicitud de compra...");
+        System.out.print("Ingrese ID de la solicitud: ");
+        int idSolicitud = Integer.parseInt(scanner.nextLine());
+        Date fecha = new Date();
+        EstadoSolicitud estado = EstadoSolicitud.SOLICITADO;
+        System.out.print("Ingrese observaciones: ");
+        String observaciones = scanner.nextLine();
+        GregorianCalendar fechaSolicitud = new GregorianCalendar();
+
+        SolicitudCompra solicitud = new SolicitudCompra(idSolicitud, fecha, estado, observaciones, fechaSolicitud);
+        solicitudesCompra.add(solicitud);
+        System.out.println("Solicitud de compra registrada exitosamente.");
     }
 
     private static void listarProveedores() {
-        System.out.println("Listar proveedores...");
+        if (proveedores.isEmpty()) {
+            System.out.println("No hay proveedores registrados.");
+        } else {
+            proveedores.forEach(System.out::println);
+        }
     }
 
     private static void listarProductos() {
-        System.out.println("Listar productos...");
+        if (productos.isEmpty()) {
+            System.out.println("No hay productos registrados.");
+        } else {
+            productos.forEach(System.out::println);
+        }
     }
 
     private static void listarSolicitudesCompra() {
-        System.out.println("Listar solicitudes de compra...");
+        if (solicitudesCompra.isEmpty()) {
+            System.out.println("No hay solicitudes de compra registradas.");
+        } else {
+            solicitudesCompra.forEach(System.out::println);
+        }
     }
 
     private static void buscarProveedorPorID() {
-        System.out.println("Buscar proveedor por ID...");
+        System.out.print("Ingrese ID del proveedor: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        proveedores.stream()
+                .filter(p -> p.getId() == id)
+                .findFirst()
+                .ifPresentOrElse(
+                        System.out::println,
+                        () -> System.out.println("Proveedor no encontrado."));
     }
 
     private static void buscarProductoPorNombre() {
-        System.out.println("Buscar producto por nombre...");
+        System.out.print("Ingrese nombre del proveedor del producto: ");
+        String nombre = scanner.nextLine();
+        productos.stream()
+                .filter(p -> p.getProveedor().getNombre().equalsIgnoreCase(nombre))
+                .findFirst()
+                .ifPresentOrElse(
+                        System.out::println,
+                        () -> System.out.println("Producto no encontrado."));
     }
 
     private static void buscarSolicitudPorNumero() {
-        System.out.println("Buscar solicitud por número...");
+        System.out.print("Ingrese número de solicitud: ");
+        int numero = Integer.parseInt(scanner.nextLine());
+        solicitudesCompra.stream()
+                .filter(s -> s.getIdSolicitud() == numero)
+                .findFirst()
+                .ifPresentOrElse(
+                        System.out::println,
+                        () -> System.out.println("Solicitud no encontrada."));
     }
 
     private static void aprobarSolicitudCompra() {
-        System.out.println("Aprobar solicitud de compra...");
+        System.out.print("Ingrese ID de solicitud a aprobar: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        solicitudesCompra.stream()
+                .filter(s -> s.getIdSolicitud() == id)
+                .findFirst()
+                .ifPresentOrElse(
+                        s -> {
+                            s.setEstado(EstadoSolicitud.APROBADO);
+                            System.out.println("Solicitud aprobada.");
+                        },
+                        () -> System.out.println("Solicitud no encontrada."));
     }
 
     private static void rechazarSolicitudCompra() {
-        System.out.println("Rechazar solicitud de compra...");
+        System.out.print("Ingrese ID de solicitud a rechazar: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        solicitudesCompra.stream()
+                .filter(s -> s.getIdSolicitud() == id)
+                .findFirst()
+                .ifPresentOrElse(
+                        s -> {
+                            s.setEstado(EstadoSolicitud.RECHAZADO);
+                            System.out.println("Solicitud rechazada.");
+                        },
+                        () -> System.out.println("Solicitud no encontrada."));
     }
 
     private static void calcularTotalSolicitud() {
-        System.out.println("Calcular total de solicitud...");
+        System.out.print("Ingrese ID de solicitud para calcular total: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        solicitudesCompra.stream()
+                .filter(s -> s.getIdSolicitud() == id)
+                .findFirst()
+                .ifPresentOrElse(
+                        s -> {
+                            System.out.println("(Este método requiere detalles de productos para calcular el total)." );
+                        },
+                        () -> System.out.println("Solicitud no encontrada."));
     }
 }

@@ -18,4 +18,13 @@ public class DetalleSolicitud {
     public int getCantidad() { return cantidad; }
     public Producto getProducto() { return producto; }
     public SolicitudCompra getSolicitud() { return solicitud; }
+
+    @Override
+    public String toString() {
+        return "DetalleSolicitud{" +
+                "cantidad=" + cantidad +
+                ", producto=" + producto +
+                ", solicitud=" + solicitud +
+                '}';
+    }
 }

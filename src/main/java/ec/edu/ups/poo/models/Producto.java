@@ -44,6 +44,11 @@ public class Producto implements IGestionable {
     }
     @Override
     public void buscar() {
-
     }
+
+    @Override
+    public String toString() {
+        return "Producto ID: " + idProducto + ", Precio: $" + precio + ", Proveedor: " + proveedor.getNombre();
+    }
+
 }

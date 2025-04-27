@@ -36,6 +36,11 @@ public class Departamento implements IGestionable {
     }
     @Override
     public void buscar() {
-
     }
+
+    @Override
+    public String toString() {
+        return "Departamento ID: " + idDepartamento + ", Nombre: " + nomDepartamento;
+    }
+
 }
