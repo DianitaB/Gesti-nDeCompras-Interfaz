@@ -1,24 +1,23 @@
 package ec.edu.ups.poo.models;
-
+import ec.edu.ups.poo.interfaces.IGestionable;
 import java.util.Date;
 import ec.edu.ups.poo.enums.EstadoSolicitud;
-import java.util.GregorianCalendar;
 
 
-public class SolicitudCompra {
+public class SolicitudCompra implements IGestionable  {
 
     private int idSolicitud;
     private Date fecha;
     private EstadoSolicitud estado;
     private String observaciones;
-    private GregorianCalendar fechaSolicitud;
 
-    public SolicitudCompra(int idSolicitud, Date fecha, EstadoSolicitud estado, String observaciones, GregorianCalendar fechaSolicitud) {
+
+    public SolicitudCompra(int idSolicitud, Date fecha, EstadoSolicitud estado, String observaciones) {
         this.idSolicitud = idSolicitud;
         this.fecha = fecha;
         this.estado = estado;
         this.observaciones = observaciones;
-        this.fechaSolicitud = fechaSolicitud;
+
     }
 
     public int getIdSolicitud() {
@@ -53,17 +52,21 @@ public class SolicitudCompra {
         this.observaciones = observaciones;
     }
 
-    public GregorianCalendar getFechaSolicitud() {
-        return fechaSolicitud;
-    }
+    @Override
+    public void registrar() {
 
-    public void setFechaSolicitud(GregorianCalendar fechaSolicitud) {
-        this.fechaSolicitud = fechaSolicitud;
     }
+    @Override
+    public void listar() {
 
+    }
+    @Override
+    public void buscar() {
+    }
     @Override
     public String toString() {
         return "Solicitud ID: " + idSolicitud + ", Fecha: " + fecha + ", Estado: " + estado + ", Observaciones: " + observaciones;
     }
+
 
 }

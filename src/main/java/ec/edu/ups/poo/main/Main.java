@@ -7,7 +7,7 @@ import ec.edu.ups.poo.enums.EstadoSolicitud;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.GregorianCalendar;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -84,13 +84,16 @@ public class Main {
         System.out.print("Ingrese ID del proveedor: ");
         int idProveedor = Integer.parseInt(scanner.nextLine());
 
-        Proveedor proveedor = proveedores.stream()
-                .filter(p -> p.getId() == idProveedor)
-                .findFirst()
-                .orElse(null);
+        Proveedor proveedorEncontrado = null;
+        for (Proveedor proveedor : proveedores) {
+            if (proveedor.getId() == idProveedor) {
+                proveedorEncontrado = proveedor;
+                break;
+            }
+        }
 
-        if (proveedor != null) {
-            productos.add(new Producto(id, precio, proveedor));
+        if (proveedorEncontrado != null) {
+            productos.add(new Producto(id, precio, proveedorEncontrado));
             System.out.println("Producto registrado exitosamente.");
         } else {
             System.out.println("Proveedor no encontrado. No se registró el producto.");
@@ -104,9 +107,9 @@ public class Main {
         EstadoSolicitud estado = EstadoSolicitud.SOLICITADO;
         System.out.print("Ingrese observaciones: ");
         String observaciones = scanner.nextLine();
-        GregorianCalendar fechaSolicitud = new GregorianCalendar();
 
-        SolicitudCompra solicitud = new SolicitudCompra(idSolicitud, fecha, estado, observaciones, fechaSolicitud);
+
+        SolicitudCompra solicitud = new SolicitudCompra(idSolicitud, fecha, estado, observaciones);
         solicitudesCompra.add(solicitud);
         System.out.println("Solicitud de compra registrada exitosamente.");
     }
@@ -115,7 +118,9 @@ public class Main {
         if (proveedores.isEmpty()) {
             System.out.println("No hay proveedores registrados.");
         } else {
-            proveedores.forEach(System.out::println);
+            for (Proveedor proveedor : proveedores) {
+                System.out.println(proveedor);
+            }
         }
     }
 
@@ -123,7 +128,9 @@ public class Main {
         if (productos.isEmpty()) {
             System.out.println("No hay productos registrados.");
         } else {
-            productos.forEach(System.out::println);
+            for (Producto producto : productos) {
+                System.out.println(producto);
+            }
         }
     }
 
@@ -131,81 +138,119 @@ public class Main {
         if (solicitudesCompra.isEmpty()) {
             System.out.println("No hay solicitudes de compra registradas.");
         } else {
-            solicitudesCompra.forEach(System.out::println);
+            for (SolicitudCompra solicitud : solicitudesCompra) {
+                System.out.println(solicitud);
+            }
         }
     }
 
     private static void buscarProveedorPorID() {
         System.out.print("Ingrese ID del proveedor: ");
         int id = Integer.parseInt(scanner.nextLine());
-        proveedores.stream()
-                .filter(p -> p.getId() == id)
-                .findFirst()
-                .ifPresentOrElse(
-                        System.out::println,
-                        () -> System.out.println("Proveedor no encontrado."));
+        boolean encontrado = false;
+
+        for (Proveedor proveedor : proveedores) {
+            if (proveedor.getId() == id) {
+                System.out.println(proveedor);
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("Proveedor no encontrado.");
+        }
     }
 
     private static void buscarProductoPorNombre() {
         System.out.print("Ingrese nombre del proveedor del producto: ");
         String nombre = scanner.nextLine();
-        productos.stream()
-                .filter(p -> p.getProveedor().getNombre().equalsIgnoreCase(nombre))
-                .findFirst()
-                .ifPresentOrElse(
-                        System.out::println,
-                        () -> System.out.println("Producto no encontrado."));
+        boolean encontrado = false;
+
+        for (Producto producto : productos) {
+            if (producto.getProveedor().getNombre().equalsIgnoreCase(nombre)) {
+                System.out.println(producto);
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("Producto no encontrado.");
+        }
     }
 
     private static void buscarSolicitudPorNumero() {
         System.out.print("Ingrese número de solicitud: ");
         int numero = Integer.parseInt(scanner.nextLine());
-        solicitudesCompra.stream()
-                .filter(s -> s.getIdSolicitud() == numero)
-                .findFirst()
-                .ifPresentOrElse(
-                        System.out::println,
-                        () -> System.out.println("Solicitud no encontrada."));
+        boolean encontrado = false;
+
+        for (SolicitudCompra solicitud : solicitudesCompra) {
+            if (solicitud.getIdSolicitud() == numero) {
+                System.out.println(solicitud);
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("Solicitud no encontrada.");
+        }
     }
 
     private static void aprobarSolicitudCompra() {
         System.out.print("Ingrese ID de solicitud a aprobar: ");
         int id = Integer.parseInt(scanner.nextLine());
-        solicitudesCompra.stream()
-                .filter(s -> s.getIdSolicitud() == id)
-                .findFirst()
-                .ifPresentOrElse(
-                        s -> {
-                            s.setEstado(EstadoSolicitud.APROBADO);
-                            System.out.println("Solicitud aprobada.");
-                        },
-                        () -> System.out.println("Solicitud no encontrada."));
+        boolean encontrado = false;
+
+        for (SolicitudCompra solicitud : solicitudesCompra) {
+            if (solicitud.getIdSolicitud() == id) {
+                solicitud.setEstado(EstadoSolicitud.APROBADO);
+                System.out.println("Solicitud aprobada.");
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("Solicitud no encontrada.");
+        }
     }
 
     private static void rechazarSolicitudCompra() {
         System.out.print("Ingrese ID de solicitud a rechazar: ");
         int id = Integer.parseInt(scanner.nextLine());
-        solicitudesCompra.stream()
-                .filter(s -> s.getIdSolicitud() == id)
-                .findFirst()
-                .ifPresentOrElse(
-                        s -> {
-                            s.setEstado(EstadoSolicitud.RECHAZADO);
-                            System.out.println("Solicitud rechazada.");
-                        },
-                        () -> System.out.println("Solicitud no encontrada."));
+        boolean encontrado = false;
+
+        for (SolicitudCompra solicitud : solicitudesCompra) {
+            if (solicitud.getIdSolicitud() == id) {
+                solicitud.setEstado(EstadoSolicitud.RECHAZADO);
+                System.out.println("Solicitud rechazada.");
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("Solicitud no encontrada.");
+        }
     }
 
     private static void calcularTotalSolicitud() {
         System.out.print("Ingrese ID de solicitud para calcular total: ");
         int id = Integer.parseInt(scanner.nextLine());
-        solicitudesCompra.stream()
-                .filter(s -> s.getIdSolicitud() == id)
-                .findFirst()
-                .ifPresentOrElse(
-                        s -> {
-                            System.out.println("(Este método requiere detalles de productos para calcular el total)." );
-                        },
-                        () -> System.out.println("Solicitud no encontrada."));
+        boolean encontrado = false;
+
+        for (SolicitudCompra solicitud : solicitudesCompra) {
+            if (solicitud.getIdSolicitud() == id) {
+                System.out.println("(Este método requiere detalles de productos para calcular el total).");
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("Solicitud no encontrada.");
+        }
     }
 }
