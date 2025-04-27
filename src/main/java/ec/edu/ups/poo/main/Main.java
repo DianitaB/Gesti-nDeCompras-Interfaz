@@ -82,7 +82,7 @@ public class Main {
                     System.out.println("Volviendo al menú principal...");
                     break;
                 default:
-                    System.out.println("Opción inválida.");
+                    System.out.println("Opción inválida..");
             }
         } while (opcionGestion != 0);
     }
