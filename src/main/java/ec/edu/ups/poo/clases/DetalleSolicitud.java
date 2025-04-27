@@ -16,7 +16,7 @@ public class DetalleSolicitud {
         this.idCantidad = idCantidad;
         this.idProducto = idProducto;
         this.cantidad = cantidad;
-        this.precioPorUnidad = precioPorUnidad;
+        this.precioPorUnidad = precioPorUnidad;//
     }
 
 
