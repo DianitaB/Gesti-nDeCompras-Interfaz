@@ -3,9 +3,9 @@ package ec.edu.ups.poo.models;
 public class DetalleSolicitud {
     private int cantidad;
     private Producto producto;
-    private Solicitud solicitud;
+    private SolicitudCompra solicitud;
 
-    public DetalleSolicitud(int cantidad, Producto producto, Solicitud solicitud) {
+    public DetalleSolicitud(int cantidad, Producto producto, SolicitudCompra solicitud) {
         this.cantidad = cantidad;
         this.producto = producto;
         this.solicitud = solicitud;
@@ -17,5 +17,5 @@ public class DetalleSolicitud {
 
     public int getCantidad() { return cantidad; }
     public Producto getProducto() { return producto; }
-    public Solicitud getSolicitud() { return solicitud; }
+    public SolicitudCompra getSolicitud() { return solicitud; }
 }

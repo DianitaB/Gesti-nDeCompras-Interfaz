@@ -1,50 +1,77 @@
 package ec.edu.ups.poo.main;
 
-import ec.edu.ups.poo.models.Empleado;
 import ec.edu.ups.poo.models.Proveedor;
-import ec.edu.ups.poo.models.Departamento;
 import ec.edu.ups.poo.models.Producto;
-import ec.edu.ups.poo.models.Solicitud;
-import ec.edu.ups.poo.enums.EstadoSolicitud;
-import ec.edu.ups.poo.interfaces.IGestionable;
+import ec.edu.ups.poo.models.SolicitudCompra;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    private static List<IGestionable> elementos = new ArrayList<>();
+
+    private static List<Proveedor> proveedores = new ArrayList<>();
+    private static List<Producto> productos = new ArrayList<>();
+    private static List<SolicitudCompra> solicitudesCompra = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         int opcion;
 
         do {
-            System.out.println("\n=== SISTEMA DE GESTIÓN ===");
-            System.out.println("1. Gestionar Empleados");
-            System.out.println("2. Gestionar Proveedores");
-            System.out.println("3. Gestionar Departamentos");
-            System.out.println("4. Gestionar Productos");
-            System.out.println("5. Gestionar Solicitudes");
+            System.out.println("\n=== MENÚ PRINCIPAL ===");
+            System.out.println("1. Registrar Proveedor");
+            System.out.println("2. Registrar Producto");
+            System.out.println("3. Registrar Solicitud de Compra");
+            System.out.println("4. Listar Proveedores");
+            System.out.println("5. Listar Productos");
+            System.out.println("6. Listar Solicitudes de Compra");
+            System.out.println("7. Buscar Proveedor por ID");
+            System.out.println("8. Buscar Producto por Nombre");
+            System.out.println("9. Buscar Solicitud por Número");
+            System.out.println("10. Aprobar Solicitud de Compra");
+            System.out.println("11. Rechazar Solicitud de Compra");
+            System.out.println("12. Calcular Total de Solicitud");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             opcion = Integer.parseInt(scanner.nextLine());
 
             switch (opcion) {
                 case 1:
-                    gestionar(new Empleado());
+                    registrarProveedor();
                     break;
                 case 2:
-                    gestionar(new Proveedor());
+                    registrarProducto();
                     break;
                 case 3:
-                    gestionar(new Departamento());
+                    registrarSolicitudCompra();
                     break;
                 case 4:
-                    gestionar(new Producto());
+                    listarProveedores();
                     break;
                 case 5:
-                    gestionar(new Solicitud());
+                    listarProductos();
+                    break;
+                case 6:
+                    listarSolicitudesCompra();
+                    break;
+                case 7:
+                    buscarProveedorPorID();
+                    break;
+                case 8:
+                    buscarProductoPorNombre();
+                    break;
+                case 9:
+                    buscarSolicitudPorNumero();
+                    break;
+                case 10:
+                    aprobarSolicitudCompra();
+                    break;
+                case 11:
+                    rechazarSolicitudCompra();
+                    break;
+                case 12:
+                    calcularTotalSolicitud();
                     break;
                 case 0:
                     System.out.println("Saliendo del sistema...");
@@ -55,35 +82,52 @@ public class Main {
         } while (opcion != 0);
     }
 
-    private static void gestionar(IGestionable objeto) {
-        int opcionGestion;
+    // Métodos básicos: de momento solo impresión de mensajes (luego tú puedes completar)
+    private static void registrarProveedor() {
+        System.out.println("Registrar proveedor...");
+    }
 
-        do {
-            System.out.println("\n--- Gestión de " + objeto.getClass().getSimpleName() + " ---");
-            System.out.println("1. Registrar");
-            System.out.println("2. Listar");
-            System.out.println("3. Buscar");
-            System.out.println("0. Volver al menú principal");
-            System.out.print("Seleccione una opción: ");
-            opcionGestion = Integer.parseInt(scanner.nextLine());
+    private static void registrarProducto() {
+        System.out.println("Registrar producto...");
+    }
 
-            switch (opcionGestion) {
-                case 1:
-                    objeto.registrar();
-                    elementos.add(objeto);
-                    break;
-                case 2:
-                    objeto.listar();
-                    break;
-                case 3:
-                    objeto.buscar();
-                    break;
-                case 0:
-                    System.out.println("Volviendo al menú principal...");
-                    break;
-                default:
-                    System.out.println("Opción inválida..");
-            }
-        } while (opcionGestion != 0);
+    private static void registrarSolicitudCompra() {
+        System.out.println("Registrar solicitud de compra...");
+    }
+
+    private static void listarProveedores() {
+        System.out.println("Listar proveedores...");
+    }
+
+    private static void listarProductos() {
+        System.out.println("Listar productos...");
+    }
+
+    private static void listarSolicitudesCompra() {
+        System.out.println("Listar solicitudes de compra...");
+    }
+
+    private static void buscarProveedorPorID() {
+        System.out.println("Buscar proveedor por ID...");
+    }
+
+    private static void buscarProductoPorNombre() {
+        System.out.println("Buscar producto por nombre...");
+    }
+
+    private static void buscarSolicitudPorNumero() {
+        System.out.println("Buscar solicitud por número...");
+    }
+
+    private static void aprobarSolicitudCompra() {
+        System.out.println("Aprobar solicitud de compra...");
+    }
+
+    private static void rechazarSolicitudCompra() {
+        System.out.println("Rechazar solicitud de compra...");
+    }
+
+    private static void calcularTotalSolicitud() {
+        System.out.println("Calcular total de solicitud...");
     }
 }
