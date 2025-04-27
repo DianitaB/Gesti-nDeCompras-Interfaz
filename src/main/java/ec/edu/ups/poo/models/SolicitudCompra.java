@@ -1,32 +1,40 @@
 package ec.edu.ups.poo.models;
 
-import ec.edu.ups.poo.enums.EstadoSolicitud;
-import ec.edu.ups.poo.interfaces.IGestionable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import ec.edu.ups.poo.enums.EstadoSolicitud;
+import java.util.GregorianCalendar;
 
-public class Solicitud implements IGestionable {
-    private int id;
-    private Empleado empleadoSolicitante;
-    private EstadoSolicitud estado;
+
+public class SolicitudCompra {
+
+    private int idSolicitud;
     private Date fecha;
-    private List<DetalleSolicitud> detalles;
+    private EstadoSolicitud estado;
+    private String observaciones;
+    private GregorianCalendar fechaSolicitud;
 
-    public Solicitud(int id, Empleado empleadoSolicitante) {
-        this.id = id;
-        this.empleadoSolicitante = empleadoSolicitante;
-        this.estado = EstadoSolicitud.PENDIENTE;
-        this.fecha = new Date();
-        this.detalles = new ArrayList<>();
+    public SolicitudCompra(int idSolicitud, Date fecha, EstadoSolicitud estado, String observaciones, GregorianCalendar fechaSolicitud) {
+        this.idSolicitud = idSolicitud;
+        this.fecha = fecha;
+        this.estado = estado;
+        this.observaciones = observaciones;
+        this.fechaSolicitud = fechaSolicitud;
     }
 
-    public void agregarDetalle(DetalleSolicitud detalle) {
-        detalles.add(detalle);
+    public int getIdSolicitud() {
+        return idSolicitud;
     }
 
-    public List<DetalleSolicitud> getDetalles() {
-        return detalles;
+    public void setIdSolicitud(int idSolicitud) {
+        this.idSolicitud = idSolicitud;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     public EstadoSolicitud getEstado() {
@@ -37,12 +45,30 @@ public class Solicitud implements IGestionable {
         this.estado = estado;
     }
 
-    public Empleado getEmpleadoSolicitante() {
-        return empleadoSolicitante;
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    public GregorianCalendar getFechaSolicitud() {
+        return fechaSolicitud;
+    }
+
+    public void setFechaSolicitud(GregorianCalendar fechaSolicitud) {
+        this.fechaSolicitud = fechaSolicitud;
     }
 
     @Override
-    public void gestionar() {
-        System.out.println("Gestionando Solicitud ID: " + id);
+    public String toString() {
+        return "SolicitudCompra{" +
+                "idSolicitud=" + idSolicitud +
+                ", fecha=" + fecha +
+                ", estado=" + estado +
+                ", observaciones='" + observaciones + '\'' +
+                ", fechaSolicitud=" + fechaSolicitud +
+                '}';
     }
 }
