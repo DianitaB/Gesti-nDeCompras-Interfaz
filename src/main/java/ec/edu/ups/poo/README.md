@@ -33,7 +33,7 @@ Este proyecto consiste en un sistema de gestión de compras desarrollado en Java
 ## 🧩 Diagrama UML
 El diseño de las clases y relaciones fue realizado mediante un diagrama UML en Draw.io, representando las entidades Proveedor, Producto, SolicitudCompra, DetalleSolicitud, Empleado y Departamento, así como su herencia desde Persona.
 
-![Diagrama UML del Sistema](images/diagrama.png)
+![Diagrama UML](images/diagrama.png)
 
 ---
 
