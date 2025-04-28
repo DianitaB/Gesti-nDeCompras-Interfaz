@@ -1,7 +1,4 @@
 package ec.edu.ups.poo.models;
-
-import ec.edu.ups.poo.interfaces.IGestionable;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,14 +6,14 @@ public class DetalleSolicitud {
     private int cantidad;
     private Producto producto;
     private SolicitudCompra solicitud;
-    private Double total;
+    private Double totalDet;
     private static ArrayList<DetalleSolicitud> detalles = new ArrayList<DetalleSolicitud>();
 
     public DetalleSolicitud() {
         this.cantidad = cantidad;
         this.producto = producto;
         this.solicitud = solicitud;
-        this.total = calcularValorTotal();
+        this.totalDet = calcularValorTotal();
     }
 
     public int getCantidad() { return cantidad; }
@@ -27,12 +24,12 @@ public class DetalleSolicitud {
         this.cantidad = cantidad;
     }
 
-    public Double getTotal() {
-        return total;
+    public Double getTotalDet() {
+        return totalDet;
     }
 
-    public void setTotal(Double total) {
-        this.total = total;
+    public void setTotalDet(Double totalDet) {
+        this.totalDet = totalDet;
     }
 
     public void setProducto(Producto producto) {
@@ -59,7 +56,7 @@ public class DetalleSolicitud {
         return "DetalleSolicitud{" +
                 "cantidad=" + cantidad +
                 ", producto=" + producto +
-                ". total=" + total +
+                ". total=" + totalDet +
                 '}';
     }
 }

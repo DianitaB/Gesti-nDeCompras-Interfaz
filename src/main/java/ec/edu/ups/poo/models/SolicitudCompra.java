@@ -101,7 +101,7 @@ public class SolicitudCompra implements IGestionable {
                     det.setSolicitud(this);
                     det.setProducto(idProd);
                     det.setCantidad(cantidad);
-                    det.setTotal(det.calcularValorTotal());
+                    det.setTotalDet(det.calcularValorTotal());
                     this.detalles.add(det);
                     break;
                 case 0:
@@ -169,9 +169,46 @@ public class SolicitudCompra implements IGestionable {
             System.out.println("Solicitud no encontrada.");
         } else {
             for (DetalleSolicitud detalle : solicitudEncontrada.detalles) {
-                totalSolicitud += detalle.getTotal();
+                totalSolicitud += detalle.getTotalDet();
             }
             System.out.println("Total de la solicitud: " + totalSolicitud);
+        }
+    }
+
+    public void aprobarSolicitud() {
+        System.out.print("Ingrese ID de solicitud a aprobar: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        boolean encontrado = false;
+
+        for (SolicitudCompra solicitud : solicitudes) {
+            if (solicitud.getIdSolicitud() == id) {
+                solicitud.setEstado(EstadoSolicitud.APROBADO);
+                System.out.println("Solicitud aprobada.");
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("Solicitud no encontrada.");
+        }
+    }
+    public void rechazarSolicitud() {
+        System.out.print("Ingrese ID de solicitud a rechazar: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        boolean encontrado = false;
+
+        for (SolicitudCompra solicitud : solicitudes) {
+            if (solicitud.getIdSolicitud() == id) {
+                solicitud.setEstado(EstadoSolicitud.RECHAZADO);
+                System.out.println("Solicitud rechazada.");
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("Solicitud no encontrada.");
         }
     }
 
@@ -179,6 +216,4 @@ public class SolicitudCompra implements IGestionable {
     public String toString() {
         return "Solicitud ID: " + idSolicitud + ", Fecha: " + fecha + ", Estado: " + estado + ", Observaciones: " + observaciones;
     }
-
-
 }

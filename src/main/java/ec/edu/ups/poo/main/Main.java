@@ -3,10 +3,8 @@ package ec.edu.ups.poo.main;
 import ec.edu.ups.poo.models.Proveedor;
 import ec.edu.ups.poo.models.Producto;
 import ec.edu.ups.poo.models.SolicitudCompra;
-import ec.edu.ups.poo.enums.EstadoSolicitud;
-
 import java.util.ArrayList;
-import java.util.Date;
+
 
 import java.util.List;
 import java.util.Scanner;
@@ -73,10 +71,10 @@ public class Main {
                     solicitudCompra.buscar();
                     break;
                 case 10:
-                    aprobarSolicitudCompra();
+                    solicitudCompra.aprobarSolicitud();
                     break;
                 case 11:
-                    rechazarSolicitudCompra();
+                    solicitudCompra.rechazarSolicitud();
                     break;
                 case 12:
                     solicitudCompra.calcularTotalSolicitud();
@@ -86,43 +84,4 @@ public class Main {
             }
         } while (opp != 0);
     }
-
-    private static void aprobarSolicitudCompra() {
-        System.out.print("Ingrese ID de solicitud a aprobar: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        boolean encontrado = false;
-
-        for (SolicitudCompra solicitud : solicitudesCompra) {
-            if (solicitud.getIdSolicitud() == id) {
-                solicitud.setEstado(EstadoSolicitud.APROBADO);
-                System.out.println("Solicitud aprobada.");
-                encontrado = true;
-                break;
-            }
-        }
-
-        if (!encontrado) {
-            System.out.println("Solicitud no encontrada.");
-        }
-    }
-
-    private static void rechazarSolicitudCompra() {
-        System.out.print("Ingrese ID de solicitud a rechazar: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        boolean encontrado = false;
-
-        for (SolicitudCompra solicitud : solicitudesCompra) {
-            if (solicitud.getIdSolicitud() == id) {
-                solicitud.setEstado(EstadoSolicitud.RECHAZADO);
-                System.out.println("Solicitud rechazada.");
-                encontrado = true;
-                break;
-            }
-        }
-
-        if (!encontrado) {
-            System.out.println("Solicitud no encontrada.");
-        }
-    }
-
 }
