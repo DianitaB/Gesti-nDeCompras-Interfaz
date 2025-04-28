@@ -11,6 +11,7 @@ public class Producto implements IGestionable {
     private String nombreProducto;
     private double precio;
     private Proveedor rProveedor;
+
     private static Scanner scanner = new Scanner(System.in);
     private static ArrayList<Producto> productos = new ArrayList<Producto>();
     private static Proveedor proveedor = new Proveedor();
