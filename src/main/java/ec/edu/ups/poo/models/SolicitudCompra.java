@@ -16,6 +16,7 @@ public class SolicitudCompra implements IGestionable {
     private EstadoSolicitud estado;
     private String observaciones;
     private Double total;
+
     private static Scanner scanner = new Scanner(System.in);
     private static Producto producto = new Producto();
     private static ArrayList<SolicitudCompra> solicitudes = new ArrayList<SolicitudCompra>();
