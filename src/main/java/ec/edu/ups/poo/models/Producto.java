@@ -85,7 +85,7 @@ public class Producto implements IGestionable {
     }
     @Override
     public void buscar() {
-        System.out.print("Ingrese nombre del proveedor del producto: ");
+        System.out.print("Ingrese nombre del producto: ");
         String nombre = scanner.nextLine();
         boolean encontrado = false;
 
@@ -96,7 +96,6 @@ public class Producto implements IGestionable {
                 break;
             }
         }
-
         if (!encontrado) {
             System.out.println("Producto no encontrado.");
         }

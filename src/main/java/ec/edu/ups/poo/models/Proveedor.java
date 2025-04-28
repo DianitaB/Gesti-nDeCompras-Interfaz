@@ -48,7 +48,7 @@ public class Proveedor extends Persona implements IGestionable {
 
     @Override
     public void listar() {
-        System.out.println("Todos los Proveedores: ");
+        System.out.println("===== Todos los Proveedores ===== ");
         if (proveedores.size() > 0) {
             for (Proveedor proveedor : proveedores) {
                 System.out.println(proveedor.toString());

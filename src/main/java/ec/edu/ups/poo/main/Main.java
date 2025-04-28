@@ -1,23 +1,14 @@
 package ec.edu.ups.poo.main;
-
 import ec.edu.ups.poo.models.Proveedor;
 import ec.edu.ups.poo.models.Producto;
 import ec.edu.ups.poo.models.SolicitudCompra;
-import java.util.ArrayList;
-
-
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-
-    private static List<Producto> productos = new ArrayList<>();
-    private static List<SolicitudCompra> solicitudesCompra = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         int opp;
-
         do {
             System.out.println("\n===== SISTEMA DE GESTIÓN DE COMPRAS ERP =====");
             System.out.println("\n=== MENÚ PRINCIPAL ===");
