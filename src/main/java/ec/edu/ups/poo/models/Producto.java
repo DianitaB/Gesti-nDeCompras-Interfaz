@@ -1,16 +1,23 @@
 package ec.edu.ups.poo.models;
 
 import ec.edu.ups.poo.interfaces.IGestionable;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Producto implements IGestionable {
     private int idProducto;
     private double precio;
-    private Proveedor proveedor;
+    private Proveedor rProveedor;
+    private static Scanner scanner = new Scanner(System.in);
+    private static ArrayList<Producto> productos = new ArrayList<Producto>();
+    private static Proveedor proveedor = new Proveedor();
 
-    public Producto(int idProducto, double precio, Proveedor proveedor) {
-        this.idProducto = idProducto;
-        this.precio = precio;
-        this.proveedor = proveedor;
+    public Producto() {
+        this.idProducto = 0;
+        this.precio = 0.0;
+        this.rProveedor = null;
     }
 
     public int getId() {
@@ -20,7 +27,7 @@ public class Producto implements IGestionable {
         return precio;
     }
     public Proveedor getProveedor() {
-        return proveedor;
+        return rProveedor;
     }
 
     public void setId(int id) {
@@ -31,19 +38,72 @@ public class Producto implements IGestionable {
         this.precio = precio;
     }
     public void setProveedor(Proveedor proveedor) {
-        this.proveedor = proveedor;
+        this.rProveedor = proveedor;
     }
 
     @Override
     public void registrar() {
+        System.out.print("Ingrese ID del producto: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        System.out.print("Ingrese precio del producto: ");
+        double precio = Double.parseDouble(scanner.nextLine());
+        System.out.println("Seleccione un proveedor disponible:");
+        proveedor.listar();
+        System.out.print("Ingrese ID del proveedor: ");
+        int idProveedor = Integer.parseInt(scanner.nextLine());
 
+        Proveedor proveedorEncontrado = null;
+        for (Proveedor proveedor : proveedor.obtenerProveedores()) {
+            if (proveedor.getId() == idProveedor) {
+                proveedorEncontrado = proveedor;
+                break;
+            }
+        }
+
+        if (proveedorEncontrado != null) {
+            this.idProducto = id;
+            this.precio = precio;
+            this.proveedor = proveedorEncontrado;
+            productos.add(this);
+            System.out.println("Producto registrado exitosamente.");
+        } else {
+            System.out.println("Proveedor no encontrado. No se registró el producto.");
+        }
     }
     @Override
     public void listar() {
-
+        System.out.println("Todos los Productos: ");
+        for (Producto producto : productos) {
+            System.out.println(producto.toString());
+        }
+        System.out.println("");
     }
     @Override
     public void buscar() {
+        System.out.print("Ingrese nombre del proveedor del producto: ");
+        String nombre = scanner.nextLine();
+        boolean encontrado = false;
+
+        for (Producto producto : productos) {
+            if (producto.getProveedor().getNombre().equalsIgnoreCase(nombre)) {
+                System.out.println(producto);
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            System.out.println("Producto no encontrado.");
+        }
+    }
+
+    public Producto buscarPorId(int id) {
+        for (Producto producto : productos) {
+            if (producto.getId() == id) {
+                return producto;
+            }
+        }
+        return null;
     }
 
     @Override

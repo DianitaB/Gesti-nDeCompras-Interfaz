@@ -13,15 +13,15 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static List<Proveedor> proveedores = new ArrayList<>();
     private static List<Producto> productos = new ArrayList<>();
     private static List<SolicitudCompra> solicitudesCompra = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        int opcion;
+        int opp;
 
         do {
+            System.out.println("\n===== SISTEMA DE GESTIÓN DE COMPRAS ERP =====");
             System.out.println("\n=== MENÚ PRINCIPAL ===");
             System.out.println("1. Registrar Proveedor");
             System.out.println("2. Registrar Producto");
@@ -37,165 +37,54 @@ public class Main {
             System.out.println("12. Calcular Total de Solicitud");
             System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
-            opcion = Integer.parseInt(scanner.nextLine());
 
-            switch (opcion) {
-                case 1: registrarProveedor(); break;
-                case 2: registrarProducto(); break;
-                case 3: registrarSolicitudCompra(); break;
-                case 4: listarProveedores(); break;
-                case 5: listarProductos(); break;
-                case 6: listarSolicitudesCompra(); break;
-                case 7: buscarProveedorPorID(); break;
-                case 8: buscarProductoPorNombre(); break;
-                case 9: buscarSolicitudPorNumero(); break;
-                case 10: aprobarSolicitudCompra(); break;
-                case 11: rechazarSolicitudCompra(); break;
-                case 12: calcularTotalSolicitud(); break;
+            opp= Integer.parseInt(scanner.nextLine());
+
+            Proveedor proveedor = new Proveedor();
+            Producto producto = new Producto();
+            SolicitudCompra solicitudCompra = new SolicitudCompra();
+
+            switch (opp) {
+                case 1:
+                    proveedor.registrar();
+                    break;
+                case 2:
+                    producto.registrar();
+                    break;
+                case 3:
+                    solicitudCompra.registrar();
+                    break;
+                case 4:
+                    proveedor.listar();
+                    break;
+                case 5:
+                    producto.listar();
+                    break;
+                case 6:
+                    solicitudCompra.listar();
+                    break;
+                case 7:
+                    proveedor.buscar();
+                    break;
+                case 8:
+                    producto.buscar();
+                    break;
+                case 9:
+                    solicitudCompra.buscar();
+                    break;
+                case 10:
+                    aprobarSolicitudCompra();
+                    break;
+                case 11:
+                    rechazarSolicitudCompra();
+                    break;
+                case 12:
+                    solicitudCompra.calcularTotalSolicitud();
+                    break;
                 case 0: System.out.println("Saliendo del sistema..."); break;
                 default: System.out.println("Opción inválida. Intente de nuevo.");
             }
-        } while (opcion != 0);
-    }
-
-    private static void registrarProveedor() {
-        System.out.print("Ingrese ID del proveedor: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        System.out.print("Ingrese nombre del proveedor: ");
-        String nombre = scanner.nextLine();
-        System.out.print("Ingrese correo electrónico: ");
-        String correo = scanner.nextLine();
-        System.out.print("Ingrese teléfono: ");
-        int telefono = Integer.parseInt(scanner.nextLine());
-        System.out.print("Ingrese tipo de contribuyente: ");
-        String tipo = scanner.nextLine();
-
-        proveedores.add(new Proveedor(id, nombre, correo, telefono, tipo));
-        System.out.println("Proveedor registrado exitosamente.");
-    }
-
-    private static void registrarProducto() {
-        System.out.print("Ingrese ID del producto: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        System.out.print("Ingrese precio del producto: ");
-        double precio = Double.parseDouble(scanner.nextLine());
-        System.out.println("Seleccione un proveedor disponible:");
-        listarProveedores();
-        System.out.print("Ingrese ID del proveedor: ");
-        int idProveedor = Integer.parseInt(scanner.nextLine());
-
-        Proveedor proveedorEncontrado = null;
-        for (Proveedor proveedor : proveedores) {
-            if (proveedor.getId() == idProveedor) {
-                proveedorEncontrado = proveedor;
-                break;
-            }
-        }
-
-        if (proveedorEncontrado != null) {
-            productos.add(new Producto(id, precio, proveedorEncontrado));
-            System.out.println("Producto registrado exitosamente.");
-        } else {
-            System.out.println("Proveedor no encontrado. No se registró el producto.");
-        }
-    }
-
-    private static void registrarSolicitudCompra() {
-        System.out.print("Ingrese ID de la solicitud: ");
-        int idSolicitud = Integer.parseInt(scanner.nextLine());
-        Date fecha = new Date();
-        EstadoSolicitud estado = EstadoSolicitud.SOLICITADO;
-        System.out.print("Ingrese observaciones: ");
-        String observaciones = scanner.nextLine();
-
-
-        SolicitudCompra solicitud = new SolicitudCompra(idSolicitud, fecha, estado, observaciones);
-        solicitudesCompra.add(solicitud);
-        System.out.println("Solicitud de compra registrada exitosamente.");
-    }
-
-    private static void listarProveedores() {
-        if (proveedores.isEmpty()) {
-            System.out.println("No hay proveedores registrados.");
-        } else {
-            for (Proveedor proveedor : proveedores) {
-                System.out.println(proveedor);
-            }
-        }
-    }
-
-    private static void listarProductos() {
-        if (productos.isEmpty()) {
-            System.out.println("No hay productos registrados.");
-        } else {
-            for (Producto producto : productos) {
-                System.out.println(producto);
-            }
-        }
-    }
-
-    private static void listarSolicitudesCompra() {
-        if (solicitudesCompra.isEmpty()) {
-            System.out.println("No hay solicitudes de compra registradas.");
-        } else {
-            for (SolicitudCompra solicitud : solicitudesCompra) {
-                System.out.println(solicitud);
-            }
-        }
-    }
-
-    private static void buscarProveedorPorID() {
-        System.out.print("Ingrese ID del proveedor: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        boolean encontrado = false;
-
-        for (Proveedor proveedor : proveedores) {
-            if (proveedor.getId() == id) {
-                System.out.println(proveedor);
-                encontrado = true;
-                break;
-            }
-        }
-
-        if (!encontrado) {
-            System.out.println("Proveedor no encontrado.");
-        }
-    }
-
-    private static void buscarProductoPorNombre() {
-        System.out.print("Ingrese nombre del proveedor del producto: ");
-        String nombre = scanner.nextLine();
-        boolean encontrado = false;
-
-        for (Producto producto : productos) {
-            if (producto.getProveedor().getNombre().equalsIgnoreCase(nombre)) {
-                System.out.println(producto);
-                encontrado = true;
-                break;
-            }
-        }
-
-        if (!encontrado) {
-            System.out.println("Producto no encontrado.");
-        }
-    }
-
-    private static void buscarSolicitudPorNumero() {
-        System.out.print("Ingrese número de solicitud: ");
-        int numero = Integer.parseInt(scanner.nextLine());
-        boolean encontrado = false;
-
-        for (SolicitudCompra solicitud : solicitudesCompra) {
-            if (solicitud.getIdSolicitud() == numero) {
-                System.out.println(solicitud);
-                encontrado = true;
-                break;
-            }
-        }
-
-        if (!encontrado) {
-            System.out.println("Solicitud no encontrada.");
-        }
+        } while (opp != 0);
     }
 
     private static void aprobarSolicitudCompra() {
@@ -236,21 +125,4 @@ public class Main {
         }
     }
 
-    private static void calcularTotalSolicitud() {
-        System.out.print("Ingrese ID de solicitud para calcular total: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        boolean encontrado = false;
-
-        for (SolicitudCompra solicitud : solicitudesCompra) {
-            if (solicitud.getIdSolicitud() == id) {
-                System.out.println("(Este método requiere detalles de productos para calcular el total).");
-                encontrado = true;
-                break;
-            }
-        }
-
-        if (!encontrado) {
-            System.out.println("Solicitud no encontrada.");
-        }
-    }
 }
