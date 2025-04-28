@@ -4,9 +4,9 @@ public abstract class Persona {
     protected int id;
     protected String nombre;
     protected String correoElectronico;
-    protected int telefono;
+    protected String telefono;
 
-    public Persona(int id, String nombre, String correoElectronico, int telefono) {
+    public Persona(int id, String nombre, String correoElectronico, String telefono) {
         this.id = id;
         this.nombre = nombre;
         this.correoElectronico = correoElectronico;
@@ -37,11 +37,11 @@ public abstract class Persona {
         this.correoElectronico = correoElectronico;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 }

@@ -11,7 +11,7 @@ public class Proveedor extends Persona implements IGestionable {
     private static List<Proveedor> proveedores = new ArrayList<>();
 
     public Proveedor() {
-        super(0, "", "",0);
+        super(0, "", "","");
         this.tipoContribuyente = "";
     }
 
@@ -31,13 +31,13 @@ public class Proveedor extends Persona implements IGestionable {
         System.out.print("Ingrese correo electrónico: ");
         String correo = scanner.nextLine();
         System.out.print("Ingrese teléfono: ");
-        int phone = Integer.parseInt(scanner.nextLine());
+        String telefono = scanner.nextLine();
         System.out.print("Ingrese tipo de contribuyente: ");
         String tipo = scanner.nextLine();
 
         this.setId(id);
         this.setNombre(nombre);
-        this.setCorreoElectronico(correoElectronico);
+        this.setCorreoElectronico(correo);
         this.setTelefono(telefono);
         this.tipoContribuyente = tipo;
         proveedores.add(this);
@@ -45,6 +45,7 @@ public class Proveedor extends Persona implements IGestionable {
         System.out.println("Proveedor registrado exitosamente.");
         System.out.println(this.toString());
     }
+
     @Override
     public void listar() {
         System.out.println("Todos los Proveedores: ");
@@ -82,7 +83,7 @@ public class Proveedor extends Persona implements IGestionable {
 
     @Override
     public String toString() {
-        return "Proveedor ID: " + id + "/nNombre: " + nombre + "/nCorreo: " + correoElectronico + "/nTeléfono: " + telefono + "/nTipo: " + tipoContribuyente;
+        return "\nProveedor ID: " + id + "\nNombre: " + nombre + "\nCorreo: " + correoElectronico + "\nTeléfono: " + telefono + "\nTipo: " + tipoContribuyente;
     }
 
 

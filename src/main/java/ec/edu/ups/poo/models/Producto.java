@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Producto implements IGestionable {
     private int idProducto;
+    private String nombreProducto;
     private double precio;
     private Proveedor rProveedor;
     private static Scanner scanner = new Scanner(System.in);
@@ -16,6 +17,7 @@ public class Producto implements IGestionable {
 
     public Producto() {
         this.idProducto = 0;
+        this.nombreProducto = "";
         this.precio = 0.0;
         this.rProveedor = null;
     }
@@ -23,6 +25,7 @@ public class Producto implements IGestionable {
     public int getId() {
         return idProducto;
     }
+    public String getNombreProducto() {return nombreProducto;}
     public double getPrecio() {
         return precio;
     }
@@ -33,7 +36,7 @@ public class Producto implements IGestionable {
     public void setId(int id) {
         this.idProducto = idProducto;
     }
-
+    public void setNombreProducto(String nombreProducto) {this.nombreProducto = nombreProducto;}
     public void setPrecio(double precio) {
         this.precio = precio;
     }
@@ -45,6 +48,8 @@ public class Producto implements IGestionable {
     public void registrar() {
         System.out.print("Ingrese ID del producto: ");
         int id = Integer.parseInt(scanner.nextLine());
+        System.out.println("Ingrese el nombre del producto: ");
+        nombreProducto = scanner.nextLine();
         System.out.print("Ingrese precio del producto: ");
         double precio = Double.parseDouble(scanner.nextLine());
         System.out.println("Seleccione un proveedor disponible:");
@@ -108,7 +113,7 @@ public class Producto implements IGestionable {
 
     @Override
     public String toString() {
-        return "Producto ID: " + idProducto + ", Precio: $" + precio + ", Proveedor: " + proveedor.getNombre();
+        return "\nProducto ID: " + idProducto + "\nNombre " + nombreProducto + "\nPrecio: $" + precio + "\nProveedor: " + proveedor.getNombre();
     }
 
 }

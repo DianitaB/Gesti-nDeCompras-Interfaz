@@ -6,7 +6,7 @@ public class Empleado extends Persona implements IGestionable {
     private Departamento departamento;
     private String cargo;
 
-    public Empleado(int id, String nombre, String correoElectronico, int telefono, Departamento departamento) {
+    public Empleado(int id, String nombre, String correoElectronico, String telefono, Departamento departamento) {
         super(id, nombre, correoElectronico,telefono);
         this.departamento = departamento;
     }
