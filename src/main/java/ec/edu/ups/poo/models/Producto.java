@@ -3,7 +3,7 @@ package ec.edu.ups.poo.models;
 import ec.edu.ups.poo.interfaces.IGestionable;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class Producto implements IGestionable {

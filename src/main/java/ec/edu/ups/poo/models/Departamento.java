@@ -1,8 +1,6 @@
 package ec.edu.ups.poo.models;
-
 import ec.edu.ups.poo.interfaces.IGestionable;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Departamento implements IGestionable {
     private int idDepartamento;

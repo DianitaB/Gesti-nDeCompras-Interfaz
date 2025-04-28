@@ -83,7 +83,11 @@ public class Proveedor extends Persona implements IGestionable {
 
     @Override
     public String toString() {
-        return "\nProveedor ID: " + id + "\nNombre: " + nombre + "\nCorreo: " + correoElectronico + "\nTeléfono: " + telefono + "\nTipo: " + tipoContribuyente;
+        return "\nProveedor ID: " + id +
+                "\nNombre: " + nombre +
+                "\nCorreo: " + correoElectronico +
+                "\nTeléfono: " + telefono +
+                "\nTipo: " + tipoContribuyente;
     }
 
 

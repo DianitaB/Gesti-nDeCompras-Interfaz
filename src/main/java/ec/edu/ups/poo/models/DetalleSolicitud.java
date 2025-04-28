@@ -54,9 +54,9 @@ public class DetalleSolicitud {
     @Override
     public String toString() {
         return "DetalleSolicitud{" +
-                "cantidad=" + cantidad +
-                ", producto=" + producto +
-                ". total=" + totalDet +
+                "\ncantidad=" + cantidad +
+                "\nproducto=" + producto +
+                "\ntotal=" + totalDet +
                 '}';
     }
 }

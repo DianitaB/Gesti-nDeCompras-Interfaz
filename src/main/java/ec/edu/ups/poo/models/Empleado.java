@@ -33,7 +33,11 @@ public class Empleado extends Persona implements IGestionable {
 
     @Override
     public String toString() {
-        return "Empleado ID: " + id + ", Nombre: " + nombre + ", Correo: " + correoElectronico + ", Teléfono: " + telefono + ", Departamento: " + departamento.getNombre();
+        return "Empleado ID: " + id +
+                "\nNombre: " + nombre +
+                "\nCorreo: " + correoElectronico +
+                "\nTeléfono: " + telefono +
+                "\nDepartamento: " + departamento.getNombre();
     }
 
 

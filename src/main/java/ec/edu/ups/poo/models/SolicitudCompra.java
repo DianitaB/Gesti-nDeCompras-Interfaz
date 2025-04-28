@@ -211,9 +211,8 @@ public class SolicitudCompra implements IGestionable {
             System.out.println("Solicitud no encontrada.");
         }
     }
-
     @Override
     public String toString() {
-        return "Solicitud ID: " + idSolicitud + ", Fecha: " + fecha + ", Estado: " + estado + ", Observaciones: " + observaciones;
+        return "\nSolicitud ID: " + idSolicitud + "\nFecha: " + fecha + "\nEstado: " + estado + "\nObservaciones: " + observaciones;
     }
 }
